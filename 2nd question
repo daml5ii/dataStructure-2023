@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void sortAndPrintNumbers() {
+    int numbers[200]; // Considering maximum 100 user-input numbers + 100 random numbers
+    int num, index_odd = 0, index_even = 99;
+    
+    srand(time(0)); // Seed for random number generation
+
+    // Adding 100 randomly generated numbers
+    for (int i = 0; i < 100; i++) {
+        numbers[i] = rand() % 1000; // Generating random numbers between 0 to 999
+    }
+
+    int total_numbers = 100;
+
+    while (1) {
+        printf("Enter a number (-1 to stop): ");
+        scanf("%d", &num);
+
+        if (num == -1) {
+            break;
+        }
+
+        if (num % 2 != 0) {
+            numbers[total_numbers] = num;
+            total_numbers++;
+        } else {
+            numbers[index_even] = num;
+            index_even--;
+        }
+    }
+
+    bubbleSort(numbers, total_numbers); // Sort all the numbers
+
+    // Printing the sorted list
+    printf("Sorted numbers (from largest to smallest):\n");
+    for (int i = 0; i < total_numbers; i++) {
+        printf("%d\n", numbers[i]);
+    }
+}
+
+int main() {
+    sortAndPrintNumbers();
+    return 0;
+}

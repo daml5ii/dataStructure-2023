@@ -1,0 +1,42 @@
+// 1st question
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void addNumbersToList() {
+    int numbers[100]; // Assuming a maximum of 100 numbers
+    int num, index_odd = 0, index_even = 99;
+
+    while (1) {
+        printf("Enter a number (-1 to stop): ");
+        scanf("%d", &num);
+
+        if (num == -1) {
+            break;
+        }
+
+        if (num % 2 != 0) {
+            // Add odd numbers to the beginning of the list
+            numbers[index_odd] = num;
+            index_odd++;
+        } else {
+            // Add even numbers to the end of the list
+            numbers[index_even] = num;
+            index_even--;
+        }
+    }
+
+    // Printing the modified list
+    printf("List after modification: ");
+    for (int i = 0; i <= index_odd; i++) {
+        printf("%d ", numbers[i]);
+    }
+    for (int i = 99; i >= index_even; i--) {
+        printf("%d ", numbers[i]);
+    }
+}
+
+int main() {
+    addNumbersToList();
+    return 0;
+}

@@ -1,0 +1,13 @@
+// Function to delete the next node from the node with the searched student name
+void deleteNextNodeByName(struct Student *head, const char *name) {
+    struct Student *target = searchStudentNodeByName(head, name);
+
+    if (target != NULL && target->next != NULL) {
+        struct Student *temp = target->next;
+        target->next = temp->next;
+        free(temp);
+        printf("Node after %s has been deleted.\n", name);
+    } else {
+        printf("Node with name '%s' not found or no node exists after it.\n", name);
+    }
+}

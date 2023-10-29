@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Define a structure for a student
+struct Student {
+    int student_number;
+    char name[50];
+    int age;
+    struct Student *next;
+};
+
+// Function to add a new student to the list
+void addStudent(struct Student **head, int number, const char *name, int age) {
+    struct Student *newStudent = (struct Student*)malloc(sizeof(struct Student));
+    newStudent->student_number = number;
+    strcpy(newStudent->name, name);
+    newStudent->age = age;
+    newStudent->next = *head;
+    *head = newStudent;
+}
+
+// Function to traverse the list and print student information
+int printStudents(struct Student *head) {
+    int count = 0;
+    struct Student *current = head;
+
+    while (current != NULL) {
+        printf("%d- %s %d %d\n", current->student_number, current->name, current->age, count + 1);
+        count++;
+        current = current->next;
+    }
+    return count;
+}
+
+// Function to free allocated memory
+void freeStudents(struct Student *head) {
+    struct Student *temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main() {
+    struct Student *head = NULL;
+
+    // Adding students to the list
+    addStudent(&head, 201, "Saliha", 27);
+    addStudent(&head, 203, "Ece", 19);
+
+    // Printing student information and counting
+    int studentCount = printStudents(head);
+    printf("Total number of students: %d\n", studentCount);
+
+    // Free memory
+    freeStudents(head);
+
+    return 0;
+}

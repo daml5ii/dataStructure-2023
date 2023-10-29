@@ -1,0 +1,17 @@
+// Function to search for a student by name
+void searchStudentByName(struct Student *head, const char *name) {
+    struct Student *current = head;
+    int found = 0;
+
+    while (current != NULL) {
+        if (strcmp(current->name, name) == 0) {
+            printf("Student found: %d- %s %d\n", current->student_number, current->name, current->age);
+            found = 1;
+        }
+        current = current->next;
+    }
+
+    if (!found) {
+        printf("Student with name '%s' not found.\n", name);
+    }
+}
